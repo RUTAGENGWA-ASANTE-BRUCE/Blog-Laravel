@@ -39,10 +39,27 @@
                 <a href="" class="font-bold">
                     {{$post->user->name}}
                 </a>
-                <span class="text-gray-500 text-sm">{{$post->created_at}}</span>
+                <span class="text-gray-500 text-sm">{{$post->created_at->diffForHumans()}}</span>
                 <p class="mb-2">{{$post->body}}</p>
             </div>
+            <div class="flex text-center">
+                @if(!$post->likedBy(auth()->user()))
+                <form action="{{route('posts.likes',$post->id)}}" method="post" class="mr-1">
+                    @csrf
+                    <button class="text-blue-500">Like</button>
+                </form>
+                @else
+                <form action="{{route('posts.likes',$post->id)}}" method="post" class="mr-1">
+                    @csrf
+                    @method('DELETE')
+                    <button class="text-blue-500">Unlike</button>
+                </form>
+                @endif
+                <span>{{$post->likes->count()}} {{Str::plural('like',$post->likes->count())}}</span>
+            </div>
+            
             @endforeach
+            {{$posts->links()}}
         @else
         <p>There no posts </p>
         @endif
