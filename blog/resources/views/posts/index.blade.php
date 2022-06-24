@@ -40,22 +40,29 @@
                     {{$post->user->name}}
                 </a>
                 <span class="text-gray-500 text-sm">{{$post->created_at->diffForHumans()}}</span>
-                <p class="mb-2">{{$post->body}}</p>
-            </div>
-            <div class="flex text-center">
-                @if(!$post->likedBy(auth()->user()))
-                <form action="{{route('posts.likes',$post->id)}}" method="post" class="mr-1">
-                    @csrf
-                    <button class="text-blue-500">Like</button>
-                </form>
-                @else
-                <form action="{{route('posts.likes',$post->id)}}" method="post" class="mr-1">
+                <p class="mb-1">{{$post->body}}</p>
+                <div>
+                    <form action="{{route('posts.destroy',$post)}}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button class="text-blue-500" type="submit">Delete</button>
+                    </form>
+                </div>
+                <div class="flex text-center">
+                    @if(!$post->likedBy(auth()->user()))
+                    <form action="{{route('posts.likes',$post->id)}}" method="post" class="mr-1">
+                        @csrf
+                        <button class="text-blue-500">Like</button>
+                    </form>
+                    @else   
+                    <form action="{{route('posts.likes',$post->id)}}" method="post" class="mr-1">
                     @csrf
                     @method('DELETE')
                     <button class="text-blue-500">Unlike</button>
                 </form>
-                @endif
                 <span>{{$post->likes->count()}} {{Str::plural('like',$post->likes->count())}}</span>
+                @endif
+            </div>
             </div>
             
             @endforeach
