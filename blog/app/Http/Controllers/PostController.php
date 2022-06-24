@@ -16,8 +16,17 @@ class PostController extends Controller
         $posts = Post::latest()-> orderBy('created_at','desc')->paginate(20);
         $data = array();
         $data['posts'] = $posts;
-        return view('posts.index', $data);
+        return view('posts.index', ['posts'=>$posts]);
     }
+
+
+    public function show(Post $post){
+        return view('posts.show',[
+            'post'=>$post
+        ]);
+    }
+
+
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -27,12 +36,6 @@ class PostController extends Controller
         $request->user()->posts()->create($request->only('body'));
 
         return back();
-    }
-
-    public function show(Post $post){
-        return view('posts.index',[
-            'post'=>$post
-        ]);
     }
 
     public function destroy(Post $post){
