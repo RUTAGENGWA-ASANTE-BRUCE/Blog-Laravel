@@ -35,6 +35,7 @@ Route::post("/register",[RegisterController::class,'store']);
 Route::get("/dashboard",[DashboardController::class,'index'])->name('dashboard')->middleware('auth');
 
 Route::get('/posts', [PostController::class,'index'])->name('posts');
+Route::get('/posts/{post}', [PostController::class,'show'])->name('posts.show');
 Route::post('/posts', [PostController::class,'store']);
 Route::delete('/post/{post}', [PostController::class,'destroy'])->name('posts.destroy');
 
