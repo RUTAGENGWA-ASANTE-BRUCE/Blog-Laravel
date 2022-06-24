@@ -11,9 +11,11 @@ class Post extends Component
      *
      * @return void
      */
-    public function __construct()
+    public $post;
+
+    public function __construct($post)
     {
-        //
+        $this->post=$post;
     }
 
     /**
