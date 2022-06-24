@@ -13,7 +13,7 @@ class PostController extends Controller
     }
     public function index()
     {
-        $posts = Post::paginate(20);
+        $posts = Post::latest()-> orderBy('created_at','desc')->paginate(20);
         $data = array();
         $data['posts'] = $posts;
         return view('posts.index', $data);
@@ -30,6 +30,7 @@ class PostController extends Controller
     }
 
     public function destroy(Post $post){
+        $this->authorize('delete',$post);
         $post->delete();   
         return back();
     }
