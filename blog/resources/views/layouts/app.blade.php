@@ -43,17 +43,22 @@
             <li><a href="" class="p-3">Home</a></li>
             <li><a href="" class="p-3">Dashboard</a></li>
             <li><a href="" class="p-3">Post</a></li>
-            <li><a href="" class="p-3">Logout</a></li>
         </ul>
 
         <ul class="flex items-center">
-            @if(auth()->user())
+            @auth
             <li><a href="" class="p-3">RUTAGENGWA Bruce</a></li>
-            <li><a href="" class="p-3">Logout</a></li>
-            @else
-            <li><a href="" class="p-3">Login</a></li>
+            <li>
+                <form action="{{route('logout')}}" method="post">
+                    @csrf
+                    <button class="p-3">Logout</button>
+                </form>
+            </li>
+            @endauth
+            @guest
+            <li><a href="{{route('login')}}" class="p-3">Login</a></li>
             <li><a href="{{route('register')}}" class="p-3">Register</a></li>
-            @endif
+            @endguest
         </ul>
     </nav>
     @yield('content')
