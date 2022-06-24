@@ -32,6 +32,13 @@
                 @enderror
             </div>
 
+            <div class="mb-4">
+                <div class="flex text-center">
+                    <input type="checkbox" name="remember" id="remember" class="mr-2 h-5 w-5 mt-1">
+                    <label for="remember">Rememeber me</label>
+                </div>
+            </div>
+
            
 
             <div class="mb-4">
