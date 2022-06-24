@@ -11,6 +11,7 @@ class UserPostController extends Controller
         $posts=$user->posts()->with(['user','likes'])->paginate(20);
         return view('users.posts.index',[
             'user'=>$user,
+            'posts'=>$posts
         ]);
     }
 }
