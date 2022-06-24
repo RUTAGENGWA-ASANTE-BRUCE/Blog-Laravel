@@ -40,8 +40,8 @@
 <body class="bg-gray-200">
     <nav class="p-6 bg-white flex justify-between mb-6">
         <ul class="flex items-center">
-            <li><a href="" class="p-3">Home</a></li>
-            <li><a href="" class="p-3">Dashboard</a></li>
+            <li><a href="/" class="p-3">Home</a></li>
+            <li><a href="{{route('dashboard')}}" class="p-3">Dashboard</a></li>
             <li><a href="" class="p-3">Post</a></li>
         </ul>
 
@@ -49,9 +49,9 @@
             @auth
             <li><a href="" class="p-3">RUTAGENGWA Bruce</a></li>
             <li>
-                <form action="{{route('logout')}}" method="post">
+                <form action="{{route('logout')}}" class="p-3 inline" method="post">
                     @csrf
-                    <button class="p-3">Logout</button>
+                    <button type="submit" class="">Logout</button>
                 </form>
             </li>
             @endauth
